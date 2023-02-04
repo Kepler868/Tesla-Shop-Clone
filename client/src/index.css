@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  @font-face {
+    font-family: Gotham-Book;
+    src: local("Gotham-Book"),
+      url(./assets/fonts/Gotham-Book.woff2) format("woff2");
+  }
+  @font-face {
+    font-family: Gotham-Bold;
+    src: local("Gotham-Bold"),
+      url(./assets/fonts/Gotham-Bold.woff2) format("woff2");
+  }
+  @font-face {
+    font-family: Gotham-Light;
+    src: local("Gotham-Light"),
+      url(./assets/fonts/Gotham-Light.woff2) format("woff2");
+  }
+  @font-face {
+    font-family: Gotham-Medium;
+    src: local("Gotham-Medium"),
+      url(./assets/fonts/Gotham-Medium.woff2) format("woff2");
+  }
+}
+@tailwind utilities;
+
+@layer components {
+  .swiper-img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+  .swiper-text {
+    cursor: default;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 6em;
+    color: white;
+  }
+  .swiper-text h1 {
+    font-weight: 600;
+    font-size: 2.5em;
+  }
+  .swiper-text h2 {
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+  .swiper-buy-button {
+    font-size: 14px;
+    background-color: #f5f5f5;
+    outline: 2px transparent;
+    outline-offset: -5px;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    width: 280px;
+    position: relative;
+    color: black;
+    font-weight: 600;
+    transition: all ease-in-out 0.33s;
+  }
+  .swiper-buy-button:active,
+  .swiper-buy-button:focus,
+  .swiper-buy-button::after {
+    transition: 0.25s;
+    padding: 10px;
+    outline: 2px solid black;
+    outline-offset: -5px;
+  }
+  .swiper-buy-button:hover {
+    background-color: #ededed;
+  }
+  .arrow-swiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 45%;
+    background-color: white;
+    opacity: 0.3;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    filter: invert(1);
+  }
+
+  .search-button-li {
+    @media (max-width: 389px) {
+      transform: translateX($ {({setting}) => `${setting.posX}px`})
+        translateY($ {({setting}) => `calc(-100% + ${setting.posY + 14}px) `});
+    }
+  }
+  .checkoutButton {
+    position: relative;
+    cursor: pointer;
+    width: 500px;
+    max-width: 90vw;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #3d69e1;
+    color: white;
+    font-family: "Gotham-Medium", sans-serif;
+  }
+  .checkoutButton:active,
+  .checkoutButton:focus .checkoutButton::after {
+    content: "";
+    border: 2px solid white;
+    position: absolute;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    top: 3px;
+    left: 3px;
+    border-radius: 32px;
+  }
+  .orderCheckoutButton {
+    padding: 12px;
+    border-radius: 32px;
+    border: none;
+    background-color: #3d69e1;
+    color: white;
+    font-weight: 500;
+    position: relative;
+  }
+  .orderCheckoutButton:active,
+  .orderCheckoutButton:focus,
+  .orderCheckoutButton::after {
+    content: "";
+    border: 2px solid white;
+    position: absolute;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    top: 3px;
+    left: 3px;
+    border-radius: 32px;
+  }
+  .checkout-sign-in-button {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #3d69e1;
+    border: none;
+    color: white;
+    position: relative;
+  }
+  .checkout-sign-in-button:active::after,
+  .checkout-sign-in-button:focus::after {
+    content: "";
+    border: 2px solid white;
+    position: absolute;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    top: 3px;
+    left: 3px;
+    border-radius: 32px;
+  }
+  .checkout-sign-in-button:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  }
+}
+body {
+  font-family: "Gotham-Book";
+}
+.swiper-pagination-bullet {
+  background-color: white !important ;
+  max-width: 6px;
+  max-height: 6px;
+  margin: 6px !important;
+  margin-bottom: 30px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+}
+
+.swiper-button-next {
+  background-image: url(./assets/images/lowerSwiper/arrowForward.svg);
+  background-size: cover;
+  background-position: center;
+  background-color: white;
+  width: 150px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+.swiper-button-prev {
+  background-image: url(./assets/images/lowerSwiper/arrowBack.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
