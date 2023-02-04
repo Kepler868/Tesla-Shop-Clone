@@ -4,8 +4,7 @@ export const cartAdapter = createEntityAdapter();
 export const cartSelectors = cartAdapter.getSelectors(
   (state) => state.cart.cartItems
 );
-//we are going to store the active cart in session storage so if the page refreshes we don't lose cart info
-//without having to save it to a database... yet
+
 const initialState = window.sessionStorage.getItem("cart")
   ? JSON.parse(window.sessionStorage.getItem("cart"))
   : {
@@ -24,16 +23,14 @@ const cartSlice = createSlice({
         .getSelectors()
         .selectEntities(state.cartItems);
       let inCartId = "";
-      //check to see if product is already in cart set inCartId to designated id
+
       cartIds.forEach((cartId) => {
         if (cartEntities[cartId].itemName === action.payload.itemName) {
           inCartId = cartId;
         }
       });
-      //if product is already in cart update quantity
-      //else create new cart item
+
       if (inCartId !== "") {
-        //parse and stringify help us create a mutable copy
         let updated = JSON.parse(JSON.stringify(cartEntities[inCartId]));
         if (updated.quantity === 5) {
           alert("Reached Max Quantity on this Item");
@@ -47,7 +44,7 @@ const cartSlice = createSlice({
         }
       } else {
         const productCopy = JSON.parse(JSON.stringify(action.payload));
-        //nanoid is provided by redux toolkit and generate a random id
+
         productCopy.id = nanoid();
         productCopy.quantity = 1;
         cartAdapter.addOne(state.cartItems, productCopy);
@@ -59,7 +56,7 @@ const cartSlice = createSlice({
       let cartEntities = cartAdapter
         .getSelectors()
         .selectEntities(state.cartItems);
-      //get the items quantity to remove it from the overall cart quantity
+
       state.cartQuantity -= cartEntities[action.payload].quantity;
       cartAdapter.removeOne(state.cartItems, action.payload);
       window.sessionStorage.setItem("cart", JSON.stringify(state));
