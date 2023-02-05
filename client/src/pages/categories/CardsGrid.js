@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Card from "../categories/Card";
 import uuid from "react-uuid";
 
-const CardsGrid = ({ products }) => {
+const CardsGrid = ({ products, subCategory }) => {
   const params = useParams();
   const [subItems, setSubItems] = useState({});
   const [useSubCategories, setUseSubCategories] = useState(false);
@@ -38,7 +38,7 @@ const CardsGrid = ({ products }) => {
   }, [params]);
 
   return !useSubCategories ? (
-    <div className="mt-10 flex gap-[5%] flex-wrap font-bold max-[960px]:gap-0 max-[960px]:justify-between">
+    <div id={subCategory.replaceAll("-", "_")} className="mt-10 flex gap-[5%] flex-wrap font-bold max-[960px]:gap-0 max-[960px]:justify-between">
       {products.map((product) => (
         <Card
           key={uuid()}
@@ -56,7 +56,7 @@ const CardsGrid = ({ products }) => {
       {Object.keys(subItems)
         .filter((key) => key === "best-seller")
         .map((key) => (
-          <div className="mt-5" key={uuid()}>
+          <div id={subCategory.replaceAll("-", "_")} className="mt-5" key={uuid()}>
             <h3 className="text-[22px] font-semibold pt-[15px] pr-0">
               {key.replaceAll("-", " ")}
             </h3>
@@ -80,7 +80,7 @@ const CardsGrid = ({ products }) => {
         .map((key) => (
           <div key={uuid()}>
             <h3 className="text-[22px] font-semibold pt-[15px] pr-0">{key}</h3>
-            <div className="mt-10 flex gap-[5%] flex-wrap font-bold max-[960px]:gap-0 max-[960px]:justify-between">
+            <div  className="mt-10 flex gap-[5%] flex-wrap font-bold max-[960px]:gap-0 max-[960px]:justify-between">
               {subItems[key].map((product) => (
                 <Card
                   key={uuid()}

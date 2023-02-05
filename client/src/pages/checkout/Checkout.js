@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 const Checkout = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(true);
 
   const validateEmail = () => {
-    let regexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (input.length) {
-      setValid(regexp.test(String(input).toLocaleLowerCase()));
+    let regexp =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (input.length && input.match(regexp)) {
+      setValid(true);
       return true;
     }
     setValid(false);
@@ -35,11 +36,12 @@ const Checkout = () => {
           onChange={(e) => setInput(e.target.value)}
           onBlur={validateEmail}
         />
-
+        {valid === false && (<div className="text-red-600 text-sm">This Mail Doesn`t Exist</div>)}
         <button
           className="focus:bg-[#2955cd] bg-[#3d69e1] rounded py-2 text-white text-base font-semibold transition-all duration-500 outline-2 outline outline-transparent outline-offset-[-5px] focus:outline-white"
           onClick={() => {
-            validateEmail() && navigate("confirm");
+              validateEmail() && navigate("confirm");
+              setValid(true)
           }}
         >
           Continue
