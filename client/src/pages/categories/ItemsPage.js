@@ -16,7 +16,7 @@ const ItemsPage = () => {
           left: 0,
           behavior: "smooth",
         });
-      }, 50);
+      },150);
     } else {
       window.scrollTo(0, 0);
     }
